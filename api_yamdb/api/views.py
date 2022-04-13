@@ -41,4 +41,3 @@ class TitleViewSet(viewsets.ModelViewSet):
         if self.action in ("retrieve", "list"):
             return ReadOnlyTitleSerializer
         return TitleSerializer
-
