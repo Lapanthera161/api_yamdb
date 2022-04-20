@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
 from rest_framework.generics import get_object_or_404
 from rest_framework.validators import UniqueValidator
 from reviews.models import Category, Comment, Genre, Review, Title, User
@@ -69,8 +70,7 @@ class ReviewSerializer(serializers.ModelSerializer):
         title = get_object_or_404(Title, pk=title_id)
         if request.method == 'POST':
             if Review.objects.filter(title=title, author=author).exists():
-                raise ValidationError('Вы не можете добавить более'
-                                      'одного отзыва на произведение')
+                raise ValidationError('Только один отзыв')
         return data
 
     class Meta:
