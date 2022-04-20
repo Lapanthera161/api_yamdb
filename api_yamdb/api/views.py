@@ -12,8 +12,7 @@ from reviews.models import Category, Genre, Review, Title, User
 
 from .filters import TitlesFilter
 from .mixins import ListCreateDestroyViewSet
-from .permissions import (IsAdmin, IsAdminModeratorOwnerOrReadOnly,
-                          IsAdminOrReadOnly)
+from .permissions import IsAdmin, IsAdminOrReadOnly, IsAuthorOrModeratorOrAdmin
 from .serializers import (CategorySerializer, CommentSerializer,
                           GenreSerializer, ReadOnlyTitleSerializer,
                           RegisterDataSerializer, ReviewSerializer,
@@ -126,6 +125,8 @@ class UserViewSet(viewsets.ModelViewSet):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+
 class ReviewViewSet(viewsets.ModelViewSet):
     serializer_class = ReviewSerializer
     permission_classes = [
