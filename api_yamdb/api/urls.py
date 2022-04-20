@@ -16,7 +16,7 @@ router.register(
 router.register(r'categories', CategoryViewSet)
 router.register(r'genres', GenreViewSet)
 router.register(r'titles', TitleViewSet)
-router.register(r"users", UserViewSet)
+router.register(r'users', UserViewSet)
 
 urlpatterns = [
     path('v1/', include(router.urls)),
