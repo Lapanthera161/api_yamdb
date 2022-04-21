@@ -20,6 +20,7 @@ from .serializers import (CategorySerializer, CommentSerializer,
 
 from reviews.models import Category, Genre, Review, Title, User
 
+
 class CategoryViewSet(ListCreateDestroyViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
