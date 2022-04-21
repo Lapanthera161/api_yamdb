@@ -1,3 +1,5 @@
+import datetime
+
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import get_object_or_404
@@ -38,6 +40,13 @@ class TitleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Title
         fields = '__all__'
+
+    def validate_year(self, value):
+        if value > datetime.datetime.now().year and value < 0:
+            raise ValidationError(
+                'Введен некорректный год'
+            )
+        return value
 
 
 class ReadOnlyTitleSerializer(serializers.ModelSerializer):
