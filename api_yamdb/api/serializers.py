@@ -1,9 +1,9 @@
-import datetime
-
+from django.utils import timezone
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.generics import get_object_or_404
 from rest_framework.validators import UniqueValidator
+
 from reviews.models import Category, Comment, Genre, Review, Title, User
 
 
@@ -42,7 +42,7 @@ class TitleSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def validate_year(self, value):
-        if value > datetime.datetime.now().year and value < 0:
+        if value > timezone.now().year:
             raise ValidationError(
                 'Введен некорректный год'
             )
